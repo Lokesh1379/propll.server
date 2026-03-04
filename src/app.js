@@ -7,7 +7,13 @@ const jobRoutes = require("./routes/job.routes");
 const emailRoutes = require("./routes/email.routes");
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:8080", "https://uiokbg.alturaitech.com"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
