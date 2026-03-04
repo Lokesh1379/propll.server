@@ -18,7 +18,6 @@ app.use(
   }),
 );
 
-app.use(cors());
 app.use(express.json());
 
 connectDB();
@@ -28,7 +27,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/job", emailRoutes);
 
-// Start server locally
+// local server
 if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
@@ -36,5 +35,4 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
-// Export for Vercel
 module.exports = app;
