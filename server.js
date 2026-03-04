@@ -10,7 +10,12 @@ const connectDB = require("./src/config/db");
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:8080", "https://uiokbg.alturaitech.com/"],
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 connectDB();
