@@ -1,13 +1,32 @@
+const express = require("express");
+const cors = require("cors");
 require("dotenv").config();
-const app = require("./src/app");
+
+const authRoutes = require("./src/routes/auth.routes");
+const adminRoutes = require("./src/routes/admin.routes");
+const jobRoutes = require("./src/routes/job.routes");
+const emailRoutes = require("./src/routes/email.routes");
 const connectDB = require("./src/config/db");
 
-const PORT = process.env.PORT || 5000;
+const app = express();
 
-// Connect database
+app.use(cors());
+app.use(express.json());
+
 connectDB();
 
-// Start server
-// app.listen(PORT, () => {
-//   console.log(`🚀 Server running on port ${PORT}`);
-// });
+app.use("/api/auth", authRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/jobs", jobRoutes);
+app.use("/api/job", emailRoutes);
+
+// Start server locally
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+}
+
+// Export for Vercel
+module.exports = app;
