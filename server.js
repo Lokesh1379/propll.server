@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:8080", "https://uiokbg.alturaitech.com"],
+    origin: "*",
   }),
 );
 
@@ -26,11 +26,11 @@ app.use("/api/jobs", jobRoutes);
 app.use("/api/job", emailRoutes);
 
 // local server
-if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-  });
-}
+// if (process.env.NODE_ENV !== "production") {
+//   const PORT = process.env.PORT || 5000;
+//   app.listen(PORT, () => {
+//     console.log(`🚀 Server running on port ${PORT}`);
+//   });
+// }
 
 module.exports = app;
